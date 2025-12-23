@@ -1,0 +1,28 @@
+Service is an abstraction or method in k8s that helps you expose group of pods over a network. 
+They provide a stable IP address and DNS name for a set of pods, allowing them to be accessed by other pods or external clients without needing to know their individual IP addresses.
+
+Types of Services:
+- ClusterIP: Exposes the service on a cluster-internal IP
+- NodePort: Exposes the service on each Node's IP at a static port
+- LoadBalancer: Exposes the service externally using a cloud provider's load balancer
+- ExternalName: Maps the service to a DNS name
+- Headless: Creates a service without a cluster IP, like we have to define clusterIP none, useful for stateful applications
+- ExternalDNS: Exposes the service using an external DNS name
+
+Headless service:
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  labels:
+    app: postgres
+spec:
+  ports:
+  - port: 5432
+    name: postgres
+  clusterIP: None
+  selector:
+    app: postgres
+
+    
