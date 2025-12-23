@@ -1,0 +1,13 @@
+in node selectore you to deploy pod on specific node which is defined in the yml file
+You add labels to your nodes, and in your pod you use nodeselectore to choose a node with matchining labels.
+nodeSelector is a field of pod spec.
+nodeSelector is a simple key value pair
+
+
+#### When to use nodeselector
+- When you want simple scheduling rules.
+- When you want to schedule a pod on a specific node.
+
+#### When not to use nodeselector
+- When you want to schedule a pod on a node that matches a set of rules.
+

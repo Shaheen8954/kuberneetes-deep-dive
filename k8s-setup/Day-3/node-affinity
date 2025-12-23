@@ -1,0 +1,78 @@
+Node affinity is the advance version of nodeselector.
+
+
+Node affinity gives the flexibility to nodes - a pod can or should run on based on node labels.
+There are two types of node affinity:
+1. preferred - it is a soft preference means if the preferred condition is met then it will be scheduled on that node otherwise it will be scheduled on any other node.
+2. required - it is a hard preference means if the required condition is met then it will be scheduled on that node otherwise it will not be scheduled.
+
+1. List the nodes in your cluster, along with their labels:
+```
+kubectl get nodes --show-labels
+```
+2. Choose one of the nodes and add a label to it:
+```
+kubectl label node node01 hello=world
+```
+3. Verify that your chosen node has a hello=world label:
+```
+kubectl get nodes --show-labels
+```
+
+Now let's create a pod with node affinity required pod to run only on this labeled node:
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: hello
+            operator: In
+            values:
+            - world            
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+```
+```
+kubectl apply -f affinity-required.yaml
+```
+Now check the pod is scheduled on the node with hello=world label:
+```
+kubectl get pods -o wide
+```
+Now let's create a pod with node affinity preferred pod to run only on this labeled node:
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 1
+        preference:
+          matchExpressions:
+          - key: hello
+            operator: In
+            values:
+            - world            
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: IfNotPresent
+```
+```
+kubectl apply -f affinity-preferred.yaml
+```
+Now check the pod is scheduled on the node with hello=world label:
+```
+kubectl get pods -o wide
+```

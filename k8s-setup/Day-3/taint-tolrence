@@ -1,0 +1,44 @@
+### Taint
+A taint is a property that you can apply to nodes to repel pods from being scheduled on them.
+It consists of three parts: key, value, and effect.
+It tells kubernetes:
+ Do not schedule pods on this node unless they have a matching toleration.
+
+There are three effects:
+- NoSchedule: Do not schedule new pods
+- PreferNoSchedule: Try not to schedule new pods
+- NoExecute: Do not schedule new pods and evict existing pods
+  
+You add a taint to a node using kubectl taint. For example,
+
+```
+kubectl taint nodes node1 key1=value1:NoSchedule
+```
+Check if the taint was applied:
+
+```
+kubectl describe nodes node1 | grep Taint
+```
+
+
+
+To remove the taint:
+
+```
+kubectl taint nodes node1 key1=value1:NoSchedule-
+```
+
+### Toleration
+Toleration is a property that you can apply to pods to allow them to be scheduled on nodes with matching taints.
+It has three main components: key, value, and effect, which must match the taint to be tolerated.
+For example, to tolerate the taint above:
+
+```
+tolerations:
+- key: "key1"
+  operator: "Equal"
+  value: "value1"
+  effect: "NoSchedule"
+```
+
+This toleration allows pods to be scheduled on nodes with the taint `key1=value1:NoSchedule`.
