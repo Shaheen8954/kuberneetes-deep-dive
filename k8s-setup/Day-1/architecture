@@ -1,0 +1,32 @@
+API Server: API server is the main entrypoint for the cluster, we can say it is a brain of controlplane.
+
+authentication: user is authenticated with the headers passed.
+authorization:
+ user is authorized to perform actions based on the roles assigned to them or using RBAC.
+Admission:
+webhook to validate or mutate the request. 
+Admission controller is a webhook that is called before a resource is created or updated.
+
+Shedular: scheduler is responsible to find the best node based on resources and other contents, like taint, tolration, affinity, nodeselector and updates the pod spec with node.
+
+Controller Manager: Make sure the actual state of the cluster matches the desired state. Any issue tell api server  what to do.
+
+ETCD: etcd is the distributed key value data store for the cluster . it store the state of the cluster in key value pairs.
+
+
+kubelet: kubelet is the node agent that runs on each node and is responsible for managing the pods on the node.
+ 
+Containerd: containerd is the container runtime that runs on each node and is responsible for running the containers.
+like - docker, containerd, podman, etc
+sheme - Runc -
+CRI (containerd): container runtime interface is the interface that kubernetes uses to interact with the container runtime.
+
+CNI: container network interface is the interface that kubernetes uses to interact with the network plugin.
+EX- Flennel, calico, cilium, Weave, etc
+
+CSI: container storage interface is the interface that kubernetes uses to interact with the storage plugin.
+EX- longhorn, openebs, etc
+
+kube-proxy: kube-proxy is a network proxy that runs on each node and is responsible for routing traffic to the correct pod.
+
+IPTABLES or ipvs: Everytime a pod is created, the ip tables is handled by kube-proxy.

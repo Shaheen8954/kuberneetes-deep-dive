@@ -1,0 +1,12 @@
+yaml is a case sensitive, human readable format.
+that's we use yaml  formate. 
+yaml is not a language, it is a data serialization format.
+
+yaml has 3 types of data:
+1. scalars: single value
+2. sequences: list of values
+3. mappings: key value pairs
+
+yaml uses indentation to define the structure of the data.
+
+yaml uses - for sequences and : for mappings.

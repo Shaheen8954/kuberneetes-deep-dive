@@ -1,0 +1,20 @@
+Aplication Programming Interface 
+It is a standerdized format to comunicate two softwares.
+It is predefined formate 
+our whole internet is defined into servers and clients.
+Server is the one who provides the service and client is the one who consumes the service.
+EX-Google Maps API, Payment API, etc
+
+REST API: Representational State Transfer API
+It is a type of api that use http methods (GET, POST, PUT, DELETE) to communicate.
+EX- GET /users, POST /login
+
+api-endpoint: It is the url of the api.
+it is the specific place where api listen the requests.
+EX- https://api.example.com/orders
+
+API is a communication interface between two software systems.
+REST API is a type of API that uses HTTP methods like GET, POST, PUT, DELETE to interact with resources.
+An API Endpoint is the URL where the REST API is accessed, like /users, /products, /login.
+
+Endpoint is the specific location where the API receives requests.
